@@ -5,13 +5,9 @@ n = input().rstrip()
 dq = deque()
 for i in n:
     dq.append(int(i))
-
-middle = int(len(dq)/ 2)
-
 left = 0
 right = 0
-
-for _ in range(middle):
+while len(dq) != 0:
     left += dq.popleft()
     right += dq.pop()
 
