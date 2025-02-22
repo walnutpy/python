@@ -1,14 +1,18 @@
 import sys
 input = sys.stdin.readline
-n = int(input())
-num = list(map(int,input().split()))
-def lis(arr):
-    a = len(arr)
-    dp = [1]*n
-    for i in range(a):
-        for j in range(i):
-            if arr[j] < arr[i]:
-                dp[i] = max(dp[j]+1,dp[i])
-    return max(dp)
-
-print(lis(num))
+a = int(input())
+n = list(map(int,input().split()))
+arr = [0]
+for i in n:
+    if i > arr[-1]:
+        arr.append(i)
+    else:
+        start,end= 0,len(arr)-1
+        while start < end:
+            mid = (start+end)//2
+            if i <= arr[mid]:
+                end = mid
+            else:
+                start = mid +1
+        arr[start] = i
+print(len(arr)-1)
