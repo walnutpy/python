@@ -1,29 +1,33 @@
 import sys
 input = sys.stdin.readline
 sys.setrecursionlimit(10**9)
-count=1
-def dfs(graph,v,visited):
-    global count
-    visited[v] = count
+
+def dfs(graph, v , visted):
+    global cnt 
+    visted[v] = True
+    count[v-1] = cnt
+    cnt += 1
+
     for i in graph[v]:
-        if visited[i] == 0:
-            count +=1
-            dfs(graph,i,visited)
+        if not visted[i]:
+            dfs(graph,i,visted)
 
-n,m,r=map(int,input().split())
-graph=[[] for _ in range(n+1)]
+n,m,r = map(int,input().split())
 
-for _ in range(m):
-    u,v= map(int,input().split())
-    graph[u].append(v)
-    graph[v].append(u)
+graph = [[] for _ in range(n+1)]
 
-for k in graph:
-    k.sort()
+for i in range(m):
+    p,q = map(int,input().split())
+    graph[p].append(q)
+    graph[q].append(p)
 
-visited = [0]*(n+1)
+visted = [False] * (n+1)
+count = [0] * n
+cnt = 1 
 
-dfs(graph,r,visited)
+for i in (graph):
+    i.sort()
+dfs(graph,r,visted)
 
-for j in range(1,n+1):
-    print(visited[j])
+for i in count:
+    print(i)
